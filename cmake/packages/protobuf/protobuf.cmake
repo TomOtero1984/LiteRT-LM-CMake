@@ -29,7 +29,7 @@ if(NOT EXISTS "${LITERTLM_PROTOBUF_CONFIG_CMAKE_FILE}")
     GIT_REPOSITORY
       https://github.com/protocolbuffers/protobuf
     GIT_TAG
-      v35.1
+      v36.0
     PREFIX
       ${LITERTLM_PROTOBUF_EXT_PREFIX}
     PATCH_COMMAND

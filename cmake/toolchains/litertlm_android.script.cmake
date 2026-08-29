@@ -36,8 +36,40 @@ else()
     message(WARNING "LiteRT-LM: Unmapped Rust target for ABI: ${ANDROID_ABI}")
 endif()
 
+string(REPLACE "-" "_" RUST_TARGET_UNDERSCORE "${RUST_TARGET}")
+set(LITERTLM_CCRS_CXXFLAGS_KEY "CXXFLAGS_${RUST_TARGET_UNDERSCORE}")
+set(LITERTLM_CCRS_CXXFLAGS_VAL "--target=${RUST_TARGET}${API_LEVEL} -std=c++20")
+set(LITERTLM_CCRS_CFLAGS_KEY "CFLAGS_${RUST_TARGET_UNDERSCORE}")
+set(LITERTLM_CCRS_CFLAGS_VAL "--target=${RUST_TARGET}${API_LEVEL}")
+
 set(RUST_LINKER_PATH "${ANDROID_NDK_ROOT}/toolchains/llvm/prebuilt/${NDK_HOST_TAG}/bin/${RUST_TARGET}${API_LEVEL}-clang")
 set(LITERTLM_RUST_LINKER_OVERRIDE "${RUST_LINKER_PATH}"
     CACHE STRING "Override the Rust linker for Android cross-compilation")
 set(LITERTLM_RUST_CARGO_ENV_VAR "${CARGO_ENV}"
     CACHE STRING "Environment variable for Rust Cargo linker override")
+
+set(_LITERTLM_CARGO_TOML "${LITERTLM_PROJECT_ROOT}/Cargo.toml")
+set(_LITERTLM_CARGO_TOML_BAK "${LITERTLM_PROJECT_ROOT}/Cargo.toml.bak")
+set(_CXX_NEW_VERSION "1.0.138")
+
+if(EXISTS "${_LITERTLM_CARGO_TOML}")
+    # Create a backup only if it doesn't already exist
+    if(NOT EXISTS "${_LITERTLM_CARGO_TOML_BAK}")
+        message(STATUS "[LiteRTLM] Android Toolchain: Backing up Cargo.toml to Cargo.toml.bak")
+        file(COPY_FILE "${_LITERTLM_CARGO_TOML}" "${_LITERTLM_CARGO_TOML_BAK}")
+    endif()
+
+    message(STATUS "[LiteRTLM] Android Toolchain: Patching Cargo.toml to use cxx version ${_CXX_NEW_VERSION}")
+    file(READ "${_LITERTLM_CARGO_TOML}" _CARGO_CONTENT)
+
+    # Replaces inline definition: cxx = "1.0.xxx"
+    string(REGEX REPLACE 
+        "cxx[ \t]*=[ \t]*\"[^\"]*\"" 
+        "cxx = \"${_CXX_NEW_VERSION}\"" 
+        _CARGO_CONTENT "${_CARGO_CONTENT}"
+    )
+
+    file(WRITE "${_LITERTLM_CARGO_TOML}" "${_CARGO_CONTENT}")
+else()
+    message(WARNING "[LiteRTLM] Android Toolchain: Could not find Cargo.toml at ${_LITERTLM_CARGO_TOML}")
+endif()

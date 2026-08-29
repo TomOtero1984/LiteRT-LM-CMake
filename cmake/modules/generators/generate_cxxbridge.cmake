@@ -34,10 +34,62 @@ if(DEFINED LITERTLM_RUST_LINKER_OVERRIDE)
     if(TARGET litert_lm_deps)
         corrosion_set_linker(litert_lm_deps "${LITERTLM_RUST_LINKER_OVERRIDE}")
         message(STATUS "[LiteRTLM] Hard-wiring litert_lm_deps linker to ${LITERTLM_RUST_LINKER_OVERRIDE}")
+        
+       if(DEFINED LITERTLM_CCRS_CXXFLAGS_KEY AND DEFINED LITERTLM_CCRS_CXXFLAGS_VAL)
+            corrosion_set_env_vars(litert_lm_deps 
+                "${LITERTLM_CCRS_CXXFLAGS_KEY}=${LITERTLM_CCRS_CXXFLAGS_VAL}"
+                "${LITERTLM_CCRS_CFLAGS_KEY}=${LITERTLM_CCRS_CFLAGS_VAL}"
+            )
+            message(STATUS "[LiteRTLM] Forcing Cargo CXXFLAGS: ${LITERTLM_CCRS_CXXFLAGS_KEY}=${LITERTLM_CCRS_CXXFLAGS_VAL}")
+            message(STATUS "[LiteRTLM] Forcing Cargo CFLAGS: ${LITERTLM_CCRS_CFLAGS_KEY}=${LITERTLM_CCRS_CFLAGS_VAL}")
+        endif()
     else()
         message(WARNING "[LiteRTLM] Target 'litert_lm_deps' not found. Linker override failed.")
     endif()
 endif()
+
+# if(DEFINED LITERTLM_RUST_LINKER_OVERRIDE)
+#     if(TARGET litert_lm_deps)
+#         corrosion_set_linker(litert_lm_deps "${LITERTLM_RUST_LINKER_OVERRIDE}")
+#         message(STATUS "[LiteRTLM] Hard-wiring litert_lm_deps linker to ${LITERTLM_RUST_LINKER_OVERRIDE}")
+        
+#         if(ANDROID_ABI STREQUAL "x86_64")
+#             set(_RUST_TARGET "x86_64-linux-android")
+#         elseif(ANDROID_ABI STREQUAL "arm64-v8a")
+#             set(_RUST_TARGET "aarch64-linux-android")
+#         endif()
+
+#         if(DEFINED _RUST_TARGET)
+#             # Override CC
+#             corrosion_set_env_var(litert_lm_deps "CC_${_RUST_TARGET}=${LITERTLM_RUST_LINKER_OVERRIDE}")
+#             # Override CXX by simply appending ++ to the C compiler path
+#             corrosion_set_env_var(litert_lm_deps "CXX_${_RUST_TARGET}=${LITERTLM_RUST_LINKER_OVERRIDE}++")
+            
+#             message(STATUS "[LiteRTLM] Forcing Cargo CXX wrapper: ${LITERTLM_RUST_LINKER_OVERRIDE}++")
+#         endif()
+#         # -----------------------------------------------------------------
+#     else()
+#         message(WARNING "[LiteRTLM] Target 'litert_lm_deps' not found. Linker override failed.")
+#     endif()
+# endif()
+
+
+# if(DEFINED LITERTLM_RUST_LINKER_OVERRIDE)
+#     if(TARGET litert_lm_deps)
+#         corrosion_set_linker(litert_lm_deps "${LITERTLM_RUST_LINKER_OVERRIDE}")
+#         message(STATUS "[LiteRTLM] Hard-wiring litert_lm_deps linker to ${LITERTLM_RUST_LINKER_OVERRIDE}")
+        
+#         # --- NEW: Inject cc-rs compiler flags directly into Cargo ---
+#         if(DEFINED LITERTLM_CCRS_CXXFLAGS_KEY AND DEFINED LITERTLM_CCRS_TARGET_VAL)
+#             corrosion_set_env_var(litert_lm_deps "${LITERTLM_CCRS_CXXFLAGS_KEY}=${LITERTLM_CCRS_TARGET_VAL}")
+#             corrosion_set_env_var(litert_lm_deps "${LITERTLM_CCRS_CFLAGS_KEY}=${LITERTLM_CCRS_TARGET_VAL}")
+#             message(STATUS "[LiteRTLM] Forcing Cargo/cc-rs flags: ${LITERTLM_CCRS_CXXFLAGS_KEY}=${LITERTLM_CCRS_TARGET_VAL}")
+#         endif()
+#         # ------------------------------------------------------------
+#     else()
+#         message(WARNING "[LiteRTLM] Target 'litert_lm_deps' not found. Linker override failed.")
+#     endif()
+# endif()
 
 corrosion_add_cxxbridge(
     litertlm_cxx_bridge
