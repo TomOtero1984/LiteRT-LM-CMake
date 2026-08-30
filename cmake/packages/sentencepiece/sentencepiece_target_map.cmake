@@ -15,6 +15,6 @@
 
 
 set(LITERTLM_SENTENCEPIECE_TARGET_MAP
-    "sentencepiece_lib=${LITERTLM_SENTENCEPIECE_LIB_DIR}/libsentencepiece.a"
-    "sentencepiece_train_lib=${LITERTLM_SENTENCEPIECE_LIB_DIR}/libsentencepiece_train.a"
+    "sentencepiece_lib=${LITERTLM_SENTENCEPIECE_LIB_DIR}/${LITERTLM_LIB_PREFIX}sentencepiece${LITERTLM_STATIC_LIB_EXT}"
+    "sentencepiece_train_lib=${LITERTLM_SENTENCEPIECE_LIB_DIR}/${LITERTLM_LIB_PREFIX}sentencepiece_train${LITERTLM_STATIC_LIB_EXT}"
 )

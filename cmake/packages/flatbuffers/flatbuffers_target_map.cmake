@@ -13,15 +13,15 @@
 # limitations under the License.
 
 set(LITERTLM_FLATBUFFERS_TARGET_MAP
-  "flatbuffers::flatbuffers=${LITERTLM_FLATBUFFERS_LIB_DIR}/libflatbuffers.a"
-  "flatbuffers=${LITERTLM_FLATBUFFERS_LIB_DIR}/libflatbuffers.a"
-  "flatbuffers::libflatbuffers=${LITERTLM_FLATBUFFERS_LIB_DIR}/libflatbuffers.a"
-  "libflatbuffers=${LITERTLM_FLATBUFFERS_LIB_DIR}/libflatbuffers.a"
+  "flatbuffers::flatbuffers=${LITERTLM_FLATBUFFERS_LIB_DIR}/${LITERTLM_LIB_PREFIX}flatbuffers${LITERTLM_STATIC_LIB_EXT}"
+  "flatbuffers=${LITERTLM_FLATBUFFERS_LIB_DIR}/${LITERTLM_LIB_PREFIX}flatbuffers${LITERTLM_STATIC_LIB_EXT}"
+  "flatbuffers::libflatbuffers=${LITERTLM_FLATBUFFERS_LIB_DIR}/${LITERTLM_LIB_PREFIX}flatbuffers${LITERTLM_STATIC_LIB_EXT}"
+  "libflatbuffers=${LITERTLM_FLATBUFFERS_LIB_DIR}/${LITERTLM_LIB_PREFIX}flatbuffers${LITERTLM_STATIC_LIB_EXT}"
   CACHE INTERNAL "Mapping of Flatbuffers targets to their corresponding library paths"
 )
 
 set(LITERTLM_FLATC_TARGET_MAP
-  "flatbuffers::flatc=${LITERTLM_FLATBUFFERS_BIN_DIR}/flatc"
-  "flatc=${LITERTLM_FLATBUFFERS_BIN_DIR}/flatc"
+  "flatbuffers::flatc=${LITERTLM_FLATBUFFERS_BIN_DIR}/flatc${LITERTLM_BIN_EXT}"
+  "flatc=${LITERTLM_FLATBUFFERS_BIN_DIR}/flatc{LITERTLM_BIN_EXT}"
   CACHE INTERNAL "Mapping of Flatbuffers targets to their corresponding binary paths"
 )

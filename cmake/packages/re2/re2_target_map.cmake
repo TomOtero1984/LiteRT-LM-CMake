@@ -13,5 +13,5 @@
 # limitations under the License.
 
 set(LITERTLM_RE2_TARGET_MAP
-    "re2::re2=${LITERTLM_RE2_LIB_DIR}/libre2.a"
+    "re2::re2=${LITERTLM_RE2_LIB_DIR}/${LITERTLM_LIB_PREFIX}re2${LITERTLM_STATIC_LIB_EXT}"
 )

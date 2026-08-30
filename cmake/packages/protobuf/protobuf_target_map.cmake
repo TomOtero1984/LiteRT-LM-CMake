@@ -13,10 +13,10 @@
 # limitations under the License.
 
 set(LITERTLM_PROTOBUF_TARGET_MAP
-  "protobuf::libprotobuf-lite=${LITERTLM_PROTOBUF_LIB_DIR}/libprotobuf-lite.a"
-  "protobuf::libprotobuf=${LITERTLM_PROTOBUF_LIB_DIR}/libprotobuf.a"
-  "protobuf::libprotoc=${LITERTLM_PROTOBUF_LIB_DIR}/libprotoc.a"
-  "protobuf::libupb=${LITERTLM_PROTOBUF_LIB_DIR}/libupb.a"
-  "protobuf::libutf8_validity=${LITERTLM_PROTOBUF_LIB_DIR}/libutf8_validity.a"
-  "protobuf::libutf8_range=${LITERTLM_PROTOBUF_LIB_DIR}/libutf8_range.a"
+  "protobuf::libprotobuf-lite=${LITERTLM_PROTOBUF_LIB_DIR}/${LITERTLM_LIB_PREFIX}protobuf-lite${LITERTLM_STATIC_LIB_EXT}"
+  "protobuf::libprotobuf=${LITERTLM_PROTOBUF_LIB_DIR}/${LITERTLM_LIB_PREFIX}protobuf${LITERTLM_STATIC_LIB_EXT}"
+  "protobuf::libprotoc=${LITERTLM_PROTOBUF_LIB_DIR}/${LITERTLM_LIB_PREFIX}protoc${LITERTLM_STATIC_LIB_EXT}"
+  "protobuf::libupb=${LITERTLM_PROTOBUF_LIB_DIR}/${LITERTLM_LIB_PREFIX}upb${LITERTLM_STATIC_LIB_EXT}"
+  "protobuf::libutf8_validity=${LITERTLM_PROTOBUF_LIB_DIR}/${LITERTLM_LIB_PREFIX}utf8_validity${LITERTLM_STATIC_LIB_EXT}"
+  "protobuf::libutf8_range=${LITERTLM_PROTOBUF_LIB_DIR}/${LITERTLM_LIB_PREFIX}utf8_range${LITERTLM_STATIC_LIB_EXT}"
 )
