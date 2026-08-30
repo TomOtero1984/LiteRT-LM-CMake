@@ -19,6 +19,19 @@
         "LITERTLM_CXX": "clang++"
       }
     },
+        {
+      "name": "default-win",
+      "generator": "NMake Makefiles",
+      "binaryDir": "${sourceDir}/cmake/build-win/${presetName}",
+      "environment": {
+        "CC": "clang",
+        "CXX": "clang++"
+      },
+      "cacheVariables": {
+        "LITERTLM_CC": "clang",
+        "LITERTLM_CXX": "clang++"
+      }
+    },
     {
       "name": "android-x86_64",
       "displayName": "Android x86_64 (API 34)",
